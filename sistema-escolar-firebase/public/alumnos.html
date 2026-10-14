@@ -4,42 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestión de Alumnos - Sistema Escolar</title>
-    
-    <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <!-- Google Fonts - Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Bootstrap Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    
-    <!-- CSS Personalizado -->
-    <link rel="stylesheet" href="css/estilos.css">
-    <link rel="stylesheet" href="css/animaciones.css">
     
     <style>
         :root {
             --bg-primary: #0f172a;
             --bg-secondary: #1e293b;
-            --bg-card: #1e293b;
-            --bg-hover: #334155;
+            --bg-card: rgba(30, 41, 59, 0.95);
             --text-primary: #f1f5f9;
             --text-secondary: #94a3b8;
             --accent-primary: #6366f1;
             --accent-success: #10b981;
             --accent-danger: #ef4444;
             --accent-warning: #f59e0b;
-            --accent-info: #06b6d4;
             --accent-pink: #ec4899;
             --border: #334155;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             font-family: 'Inter', sans-serif;
@@ -48,7 +32,6 @@
             min-height: 100vh;
         }
 
-        /* Navbar */
         .navbar-custom {
             background: rgba(30, 41, 59, 0.95);
             backdrop-filter: blur(10px);
@@ -78,92 +61,48 @@
             color: white;
         }
 
-        .user-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
+        .user-info { display: flex; align-items: center; gap: 15px; }
         .user-avatar {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
+            width: 40px; height: 40px; border-radius: 50%;
             background: linear-gradient(135deg, var(--accent-primary), #8b5cf6);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            color: white;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 600; color: white;
         }
-
-        .user-name {
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .user-role {
-            font-size: 12px;
-            color: var(--text-secondary);
-        }
-
+        .user-name { font-weight: 600; color: var(--text-primary); }
+        .user-role { font-size: 12px; color: var(--text-secondary); }
+        
         .btn-logout {
             background: rgba(239, 68, 68, 0.1);
             border: 1px solid rgba(239, 68, 68, 0.3);
-            color: #fca5a5;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 14px;
-            transition: all 0.3s;
+            color: #fca5a5; padding: 8px 16px; border-radius: 8px;
+            font-size: 14px; transition: all 0.3s; cursor: pointer;
         }
+        .btn-logout:hover { background: rgba(239, 68, 68, 0.2); color: #fecaca; }
 
-        .btn-logout:hover {
-            background: rgba(239, 68, 68, 0.2);
-            color: #fecaca;
-        }
+        .main-content { padding: 30px 0; }
 
-        /* Main Content */
-        .main-content {
-            padding: 30px 0;
-        }
-
-        /* Page Header */
         .page-header {
             background: linear-gradient(135deg, rgba(99, 102, 241, 0.15), rgba(139, 92, 246, 0.15));
             border: 1px solid rgba(99, 102, 241, 0.3);
-            border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 30px;
+            border-radius: 16px; padding: 30px; margin-bottom: 30px;
             animation: slideUp 0.6s ease-out;
         }
 
-        .page-header h1 {
-            font-size: 28px;
-            font-weight: 700;
-            margin-bottom: 10px;
-        }
+        .page-header h1 { font-size: 28px; font-weight: 700; margin-bottom: 10px; }
+        .page-header .subtitle { color: var(--text-secondary); font-size: 16px; }
 
-        .page-header .subtitle {
-            color: var(--text-secondary);
-            font-size: 16px;
-        }
-
-        /* Stats Cards */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
+            gap: 20px; margin-bottom: 30px;
         }
 
         .stat-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 25px;
-            transition: all 0.3s;
+            border-radius: 16px; padding: 25px;
+            transition: all 0.3s; position: relative; overflow: hidden;
             animation: slideUp 0.6s ease-out;
-            position: relative;
-            overflow: hidden;
         }
 
         .stat-card:nth-child(1) { animation-delay: 0.1s; }
@@ -176,12 +115,7 @@
         }
 
         .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
+            content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 4px;
         }
 
         .stat-card.total::before { background: linear-gradient(90deg, var(--accent-primary), #8b5cf6); }
@@ -189,14 +123,9 @@
         .stat-card.female::before { background: linear-gradient(90deg, var(--accent-pink), #ec4899); }
 
         .stat-icon {
-            width: 50px;
-            height: 50px;
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            margin-bottom: 15px;
+            width: 50px; height: 50px; border-radius: 12px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 24px; margin-bottom: 15px;
         }
 
         .stat-card.total .stat-icon { background: rgba(99, 102, 241, 0.15); color: var(--accent-primary); }
@@ -204,20 +133,12 @@
         .stat-card.female .stat-icon { background: rgba(236, 72, 153, 0.15); color: var(--accent-pink); }
 
         .stat-label {
-            color: var(--text-secondary);
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 8px;
+            color: var(--text-secondary); font-size: 13px;
+            text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;
         }
 
-        .stat-value {
-            font-size: 36px;
-            font-weight: 700;
-            color: var(--text-primary);
-        }
+        .stat-value { font-size: 36px; font-weight: 700; color: var(--text-primary); }
 
-        /* Content Grid */
         .content-grid {
             display: grid;
             grid-template-columns: 350px 1fr;
@@ -225,156 +146,78 @@
             animation: slideUp 0.6s ease-out;
         }
 
-        /* Form Card */
         .form-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 25px;
-            height: fit-content;
-            position: sticky;
-            top: 20px;
+            border-radius: 16px; padding: 25px;
+            height: fit-content; position: sticky; top: 20px;
         }
 
         .form-card h3 {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-size: 20px; font-weight: 700; margin-bottom: 20px;
+            display: flex; align-items: center; gap: 10px;
         }
 
-        .input-group-custom {
-            position: relative;
-            margin-bottom: 20px;
-        }
-
+        .input-group-custom { position: relative; margin-bottom: 20px; }
         .input-group-custom i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-secondary);
-            font-size: 18px;
-            transition: color 0.3s;
+            position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+            color: var(--text-secondary); font-size: 18px; transition: color 0.3s;
         }
 
-        .input-group-custom input,
-        .input-group-custom select {
-            background: rgba(15, 23, 42, 0.6);
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            padding: 14px 15px 14px 50px;
-            color: var(--text-primary);
-            width: 100%;
-            font-size: 15px;
-            transition: all 0.3s;
+        .input-group-custom input, .input-group-custom select {
+            background: rgba(15, 23, 42, 0.6); border: 2px solid var(--border);
+            border-radius: 12px; padding: 14px 15px 14px 50px;
+            color: var(--text-primary); width: 100%; font-size: 15px; transition: all 0.3s;
         }
 
-        .input-group-custom input:focus,
-        .input-group-custom select:focus {
-            outline: none;
-            border-color: var(--accent-primary);
-            background: rgba(15, 23, 42, 0.9);
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        .input-group-custom input:focus, .input-group-custom select:focus {
+            outline: none; border-color: var(--accent-primary);
+            background: rgba(15, 23, 42, 0.9); box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
         }
-
-        .input-group-custom input:focus + i,
-        .input-group-custom select:focus + i {
-            color: var(--accent-primary);
-        }
-
-        .input-group-custom input::placeholder {
-            color: #64748b;
-        }
+        .input-group-custom input:focus + i, .input-group-custom select:focus + i { color: var(--accent-primary); }
+        .input-group-custom input::placeholder { color: #64748b; }
 
         .btn-submit {
-            width: 100%;
-            padding: 14px;
+            width: 100%; padding: 14px;
             background: linear-gradient(135deg, var(--accent-primary), #8b5cf6);
-            border: none;
-            border-radius: 12px;
-            color: white;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
+            border: none; border-radius: 12px; color: white; font-size: 16px;
+            font-weight: 600; cursor: pointer; transition: all 0.3s;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
         }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.5); }
+        .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
-        .btn-submit:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.5);
-        }
-
-        .btn-submit:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        /* List Card */
         .list-card {
             background: var(--bg-card);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 25px;
+            border-radius: 16px; padding: 25px;
         }
 
         .list-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-            gap: 15px;
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 20px; flex-wrap: wrap; gap: 15px;
         }
 
         .list-header h3 {
-            font-size: 20px;
-            font-weight: 700;
-            margin: 0;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            font-size: 20px; font-weight: 700; margin: 0;
+            display: flex; align-items: center; gap: 10px;
         }
 
         .search-box {
-            background: rgba(15, 23, 42, 0.6);
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 10px 15px;
-            color: var(--text-primary);
-            width: 250px;
-            font-size: 14px;
+            background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border);
+            border-radius: 10px; padding: 10px 15px; color: var(--text-primary);
+            width: 250px; font-size: 14px;
         }
+        .search-box:focus { outline: none; border-color: var(--accent-primary); }
 
-        .search-box:focus {
-            outline: none;
-            border-color: var(--accent-primary);
-        }
-
-        /* Student List */
-        .student-list {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
+        .student-list { display: flex; flex-direction: column; gap: 12px; }
 
         .student-item {
             background: rgba(15, 23, 42, 0.4);
             border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 15px 20px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            transition: all 0.3s;
-            animation: slideInRight 0.4s ease-out;
+            border-radius: 12px; padding: 15px 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            transition: all 0.3s; animation: slideInRight 0.4s ease-out;
         }
 
         .student-item:hover {
@@ -383,224 +226,83 @@
             transform: translateX(5px);
         }
 
-        .student-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            flex: 1;
-        }
+        .student-info { display: flex; align-items: center; gap: 15px; flex: 1; }
 
         .student-avatar {
-            width: 45px;
-            height: 45px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 600;
-            font-size: 18px;
-            color: white;
+            width: 45px; height: 45px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 600; font-size: 18px; color: white;
         }
 
-        .student-avatar.male {
-            background: linear-gradient(135deg, #3b82f6, #06b6d4);
-        }
+        .student-avatar.male { background: linear-gradient(135deg, #3b82f6, #06b6d4); }
+        .student-avatar.female { background: linear-gradient(135deg, var(--accent-pink), #ec4899); }
 
-        .student-avatar.female {
-            background: linear-gradient(135deg, var(--accent-pink), #ec4899);
-        }
-
-        .student-details {
-            flex: 1;
-        }
-
-        .student-name {
-            font-weight: 600;
-            font-size: 16px;
-            margin-bottom: 4px;
-        }
-
-        .student-meta {
-            font-size: 13px;
-            color: var(--text-secondary);
-            display: flex;
-            gap: 15px;
-        }
+        .student-details { flex: 1; }
+        .student-name { font-weight: 600; font-size: 16px; margin-bottom: 4px; }
+        .student-meta { font-size: 13px; color: var(--text-secondary); display: flex; gap: 15px; }
 
         .gender-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 4px 10px; border-radius: 20px; font-size: 12px; font-weight: 600;
         }
+        .gender-badge.male { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+        .gender-badge.female { background: rgba(236, 72, 153, 0.15); color: var(--accent-pink); }
 
-        .gender-badge.male {
-            background: rgba(59, 130, 246, 0.15);
-            color: #3b82f6;
-        }
-
-        .gender-badge.female {
-            background: rgba(236, 72, 153, 0.15);
-            color: var(--accent-pink);
-        }
-
-        .student-actions {
-            display: flex;
-            gap: 8px;
-        }
+        .student-actions { display: flex; gap: 8px; }
 
         .btn-action {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 16px;
-            transition: all 0.3s;
+            width: 36px; height: 36px; border-radius: 8px; border: none;
+            cursor: pointer; display: flex; align-items: center; justify-content: center;
+            font-size: 16px; transition: all 0.3s;
         }
+        .btn-edit { background: rgba(245, 158, 11, 0.15); color: var(--accent-warning); }
+        .btn-edit:hover { background: rgba(245, 158, 11, 0.3); transform: scale(1.1); }
+        .btn-delete { background: rgba(239, 68, 68, 0.15); color: var(--accent-danger); }
+        .btn-delete:hover { background: rgba(239, 68, 68, 0.3); transform: scale(1.1); }
 
-        .btn-edit {
-            background: rgba(245, 158, 11, 0.15);
-            color: var(--accent-warning);
-        }
+        .empty-state { text-align: center; padding: 60px 20px; color: var(--text-secondary); }
+        .empty-state i { font-size: 64px; margin-bottom: 20px; opacity: 0.5; }
+        .empty-state h4 { font-size: 20px; margin-bottom: 10px; color: var(--text-primary); }
 
-        .btn-edit:hover {
-            background: rgba(245, 158, 11, 0.3);
-            transform: scale(1.1);
-        }
-
-        .btn-delete {
-            background: rgba(239, 68, 68, 0.15);
-            color: var(--accent-danger);
-        }
-
-        .btn-delete:hover {
-            background: rgba(239, 68, 68, 0.3);
-            transform: scale(1.1);
-        }
-
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: var(--text-secondary);
-        }
-
-        .empty-state i {
-            font-size: 64px;
-            margin-bottom: 20px;
-            opacity: 0.5;
-        }
-
-        .empty-state h4 {
-            font-size: 20px;
-            margin-bottom: 10px;
-            color: var(--text-primary);
-        }
-
-        /* Alert */
         .alert-custom {
-            padding: 12px 15px;
-            border-radius: 10px;
-            font-size: 14px;
-            margin-bottom: 20px;
-            display: none;
+            padding: 12px 15px; border-radius: 10px; font-size: 14px;
+            margin-bottom: 20px; display: none;
         }
+        .alert-custom.show { display: block; animation: slideInRight 0.4s ease-out; }
+        .alert-custom.error { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: #fca5a5; }
+        .alert-custom.success { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #6ee7b7; }
 
-        .alert-custom.show {
-            display: block;
-            animation: slideInRight 0.4s ease-out;
-        }
-
-        .alert-custom.error {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            color: #fca5a5;
-        }
-
-        .alert-custom.success {
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            color: #6ee7b7;
-        }
-
-        /* Loading */
         .loading-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: var(--bg-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             z-index: 9999;
         }
-
-        .loading-wave {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
+        .loading-wave { display: flex; align-items: center; gap: 8px; }
         .loading-bar {
-            width: 8px;
-            height: 40px;
+            width: 8px; height: 40px;
             background: linear-gradient(135deg, var(--accent-primary), #8b5cf6);
-            border-radius: 4px;
-            animation: loading-wave-animation 1s ease-in-out infinite;
+            border-radius: 4px; animation: wave 1s ease-in-out infinite;
         }
-
         .loading-bar:nth-child(2) { animation-delay: 0.1s; }
         .loading-bar:nth-child(3) { animation-delay: 0.2s; }
         .loading-bar:nth-child(4) { animation-delay: 0.3s; }
 
-        @keyframes loading-wave-animation {
-            0%, 100% { height: 10px; }
-            50% { height: 60px; }
-        }
+        @keyframes wave { 0%, 100% { height: 10px; } 50% { height: 60px; } }
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
 
-        /* Responsive */
         @media (max-width: 992px) {
-            .content-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .form-card {
-                position: static;
-            }
-
-            .user-name {
-                display: none;
-            }
+            .content-grid { grid-template-columns: 1fr; }
+            .form-card { position: static; }
+            .user-name { display: none; }
         }
 
         @media (max-width: 768px) {
-            .page-header h1 {
-                font-size: 22px;
-            }
-
-            .stat-value {
-                font-size: 28px;
-            }
-
-            .student-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 15px;
-            }
-
-            .student-actions {
-                width: 100%;
-                justify-content: flex-end;
-            }
+            .page-header h1 { font-size: 22px; }
+            .stat-value { font-size: 28px; }
+            .student-item { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .student-actions { width: 100%; justify-content: flex-end; }
         }
     </style>
 </head>
@@ -620,9 +322,7 @@
         <div class="container">
             <div class="d-flex justify-content-between align-items-center">
                 <a href="dashboard.html" class="navbar-brand-custom">
-                    <div class="logo-icon">
-                        <i class="bi bi-mortarboard-fill"></i>
-                    </div>
+                    <div class="logo-icon"><i class="bi bi-mortarboard-fill"></i></div>
                     <div>
                         <div>Complejo Educativo Thomas Jefferson</div>
                         <small style="color: var(--text-secondary); font-size: 12px;">Sistema de Gestión Escolar</small>
@@ -657,25 +357,19 @@
         <!-- Stats Grid -->
         <div class="stats-grid">
             <div class="stat-card total">
-                <div class="stat-icon">
-                    <i class="bi bi-people-fill"></i>
-                </div>
+                <div class="stat-icon"><i class="bi bi-people-fill"></i></div>
                 <div class="stat-label">Total Alumnos</div>
                 <div class="stat-value" id="statTotal">0</div>
             </div>
             
             <div class="stat-card male">
-                <div class="stat-icon">
-                    <i class="bi bi-gender-male"></i>
-                </div>
+                <div class="stat-icon"><i class="bi bi-gender-male"></i></div>
                 <div class="stat-label">Varones</div>
                 <div class="stat-value" id="statMale">0</div>
             </div>
             
             <div class="stat-card female">
-                <div class="stat-icon">
-                    <i class="bi bi-gender-female"></i>
-                </div>
+                <div class="stat-icon"><i class="bi bi-gender-female"></i></div>
                 <div class="stat-label">Niñas</div>
                 <div class="stat-value" id="statFemale">0</div>
             </div>
@@ -733,7 +427,7 @@
                         <i class="bi bi-list-ul"></i>
                         Lista de Alumnos
                     </h3>
-                    <input type="text" class="search-box" id="searchBox" placeholder="🔍 Buscar por nombre...">
+                    <input type="text" class="search-box" id="searchBox" placeholder=" Buscar por nombre...">
                 </div>
 
                 <div class="student-list" id="studentList">
@@ -753,20 +447,23 @@
         import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
         import { getFirestore, collection, addDoc, updateDoc, deleteDoc, doc, query, where, getDocs, onSnapshot } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        // Configuración de Firebase
+        // ============================================
+        // 🔧 CONFIGURACIÓN DE FIREBASE (NUEVA)
+        // ============================================
         const firebaseConfig = {
-            apiKey: "AIzaSyA9M6Yo72SELSRtntpRmacOY-0WdA7c58s",
-            authDomain: "sistema-escolar-ef4a0.firebaseapp.com",
-            projectId: "sistema-escolar-ef4a0",
-            storageBucket: "sistema-escolar-ef4a0.firebasestorage.app",
-            messagingSenderId: "594493709794",
-            appId: "1:594493709794:web:05a2fb57521fc1b9aeedbb",
-            measurementId: "G-2KEHBX540T"
+            apiKey: "AIzaSyC1VnkczVVRwNDj6G1kPPdHNZXWNPy_JXA",
+            authDomain: "sistema-escolar-8fcee.firebaseapp.com",
+            projectId: "sistema-escolar-8fcee",
+            storageBucket: "sistema-escolar-8fcee.firebasestorage.app",
+            messagingSenderId: "1017912885647",
+            appId: "1:1017912885647:web:ba6746d5605d281b1dcbfa"
         };
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
+
+        console.log("✅ Firebase inicializado en alumnos.html");
 
         // Variables globales
         let usuarioActual = null;
@@ -783,8 +480,9 @@
         const btnText = document.getElementById('btnText');
 
         // Verificar sesión
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, async (user) => {
             if (!user) {
+                console.log("⚠️ No hay usuario, redirigiendo al login...");
                 window.location.href = 'index.html';
                 return;
             }
@@ -792,8 +490,16 @@
             usuarioActual = JSON.parse(localStorage.getItem('usuario'));
             
             if (!usuarioActual || usuarioActual.rol !== 'docente') {
+                console.log("⚠️ No es docente, redirigiendo...");
                 window.location.href = 'admin.html';
                 return;
+            }
+
+            // Verificar que tenga grado asignado
+            if (!usuarioActual.grado || usuarioActual.grado === 'Sin grado asignado') {
+                console.error("❌ El docente no tiene grado asignado");
+                mostrarAlerta('⚠️ No tienes un grado asignado. Contacta al administrador.', 'error');
+                document.getElementById('userGrade').textContent = 'Sin grado asignado';
             }
 
             // Mostrar información del usuario
@@ -802,8 +508,13 @@
             document.getElementById('userGrade').textContent = usuarioActual.grado || 'Sin grado asignado';
             document.getElementById('gradoAlumno').value = usuarioActual.grado || '';
 
+            console.log("✅ Usuario docente cargado:", usuarioActual.nombre);
+            console.log("📚 Grado asignado:", usuarioActual.grado);
+
             // Cargar alumnos en tiempo real
-            cargarAlumnos();
+            if (usuarioActual.grado) {
+                cargarAlumnos();
+            }
 
             // Ocultar loading
             setTimeout(() => {
@@ -813,6 +524,8 @@
 
         // Cargar alumnos en tiempo real
         function cargarAlumnos() {
+            console.log("🔄 Cargando alumnos del grado:", usuarioActual.grado);
+            
             const q = query(
                 collection(db, 'alumnos'),
                 where('grado', '==', usuarioActual.grado)
@@ -824,8 +537,13 @@
                     alumnos.push({ id: doc.id, ...doc.data() });
                 });
 
+                console.log(`📊 ${alumnos.length} alumnos cargados`);
+
                 actualizarEstadisticas();
                 renderizarLista(alumnos);
+            }, (error) => {
+                console.error("❌ Error al cargar alumnos:", error);
+                mostrarAlerta('Error al cargar alumnos: ' + error.message, 'error');
             });
         }
 
@@ -843,7 +561,7 @@
         // Animar contadores
         function animarContador(elementId, target) {
             const element = document.getElementById(elementId);
-            let current = parseInt(element.textContent);
+            let current = parseInt(element.textContent) || 0;
             
             if (current === target) return;
 
@@ -908,8 +626,15 @@
             const genero = document.getElementById('generoAlumno').value;
             const grado = document.getElementById('gradoAlumno').value;
 
+            console.log("📝 Intentando registrar alumno:", { nombre, genero, grado });
+
             if (!nombre || !genero || !grado) {
                 mostrarAlerta('❌ Completa todos los campos', 'error');
+                return;
+            }
+
+            if (!usuarioActual.grado) {
+                mostrarAlerta('⚠️ No tienes un grado asignado', 'error');
                 return;
             }
 
@@ -919,6 +644,7 @@
             try {
                 if (editandoId) {
                     // Actualizar
+                    console.log("✏️ Actualizando alumno:", editandoId);
                     await updateDoc(doc(db, 'alumnos', editandoId), {
                         nombre,
                         genero,
@@ -929,6 +655,7 @@
                     cancelarEdicion();
                 } else {
                     // Crear nuevo
+                    console.log("➕ Creando nuevo alumno...");
                     await addDoc(collection(db, 'alumnos'), {
                         nombre,
                         genero,
@@ -941,8 +668,8 @@
                     document.getElementById('gradoAlumno').value = grado;
                 }
             } catch (error) {
-                console.error('Error:', error);
-                mostrarAlerta(' Error al guardar: ' + error.message, 'error');
+                console.error("❌ Error al guardar:", error);
+                mostrarAlerta('❌ Error al guardar: ' + error.message, 'error');
             }
 
             btnSubmit.disabled = false;
@@ -962,7 +689,6 @@
             btnText.textContent = 'Actualizar Alumno';
             btnCancel.style.display = 'flex';
 
-            // Scroll al formulario en móvil
             if (window.innerWidth <= 992) {
                 document.querySelector('.form-card').scrollIntoView({ behavior: 'smooth' });
             }
@@ -988,10 +714,10 @@
 
             try {
                 await deleteDoc(doc(db, 'alumnos', id));
-                mostrarAlerta('️ Alumno eliminado correctamente', 'success');
+                mostrarAlerta('🗑️ Alumno eliminado correctamente', 'success');
             } catch (error) {
-                console.error('Error:', error);
-                mostrarAlerta(' Error al eliminar: ' + error.message, 'error');
+                console.error("❌ Error al eliminar:", error);
+                mostrarAlerta('❌ Error al eliminar: ' + error.message, 'error');
             }
         };
 
@@ -1019,7 +745,7 @@
                     localStorage.removeItem('usuario');
                     window.location.href = 'index.html';
                 } catch (error) {
-                    console.error('Error al cerrar sesión:', error);
+                    console.error("Error al cerrar sesión:", error);
                     alert('Error al cerrar sesión: ' + error.message);
                 }
             }
