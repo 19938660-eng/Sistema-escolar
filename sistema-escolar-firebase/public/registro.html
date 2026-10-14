@@ -7,7 +7,6 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="css/animaciones.css">
     
     <style>
         :root {
@@ -20,6 +19,8 @@
             --border: #334155;
         }
 
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
             font-family: 'Inter', sans-serif;
             background: var(--bg-primary);
@@ -28,181 +29,103 @@
             overflow-x: hidden;
         }
 
-        .split-container {
-            display: flex;
-            min-height: 100vh;
-        }
+        .split-container { display: flex; min-height: 100vh; }
 
         /* Lado Izquierdo - Información */
         .info-side {
             flex: 1;
             background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(15, 23, 42, 0.9)), 
                         url('img/fondos/fondo-login.jpg') center/cover;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 40px;
-            position: relative;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            padding: 40px; position: relative;
         }
 
-        .info-content {
-            text-align: center;
-            animation: slideInLeft 0.8s ease-out;
-        }
+        .info-content { text-align: center; animation: slideInLeft 0.8s ease-out; }
 
         .school-logo {
-            width: 120px;
-            height: 120px;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            border: 2px solid rgba(255, 255, 255, 0.2);
+            width: 120px; height: 120px;
+            background: rgba(255, 255, 255, 0.1); backdrop-filter: blur(10px);
+            border-radius: 50%; display: flex; align-items: center; justify-content: center;
+            margin: 0 auto 20px; border: 2px solid rgba(255, 255, 255, 0.2);
         }
 
-        .school-logo img {
-            max-width: 80%;
-            max-height: 80%;
-        }
-
-        .info-side h1 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 10px;
-            color: white;
-        }
-
-        .info-side p {
-            font-size: 1.1rem;
-            color: rgba(255, 255, 255, 0.8);
-        }
+        .info-side h1 { font-size: 2.5rem; font-weight: 700; margin-bottom: 10px; color: white; }
+        .info-side p { font-size: 1.1rem; color: rgba(255, 255, 255, 0.8); }
 
         /* Lado Derecho - Formulario */
         .form-side {
-            flex: 1;
-            background: var(--bg-secondary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 40px 20px;
-            animation: slideInRight 0.8s ease-out;
+            flex: 1; background: var(--bg-secondary);
+            display: flex; align-items: center; justify-content: center;
+            padding: 40px 20px; animation: slideInRight 0.8s ease-out;
         }
 
         .register-card {
-            background: rgba(30, 41, 59, 0.8);
-            backdrop-filter: blur(10px);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 40px;
-            width: 100%;
-            max-width: 500px;
+            background: rgba(30, 41, 59, 0.8); backdrop-filter: blur(10px);
+            border: 1px solid var(--border); border-radius: 20px;
+            padding: 40px; width: 100%; max-width: 500px;
             box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
-        .form-title {
-            font-size: 24px;
-            font-weight: 700;
-            margin-bottom: 5px;
-            color: var(--text-primary);
-        }
+        .form-title { font-size: 24px; font-weight: 700; margin-bottom: 5px; color: var(--text-primary); }
+        .form-subtitle { color: var(--text-secondary); font-size: 14px; margin-bottom: 30px; }
 
-        .form-subtitle {
-            color: var(--text-secondary);
-            font-size: 14px;
-            margin-bottom: 30px;
-        }
-
-        .input-group-custom {
-            position: relative;
-            margin-bottom: 20px;
-        }
-
+        .input-group-custom { position: relative; margin-bottom: 20px; }
         .input-group-custom i {
-            position: absolute;
-            left: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: var(--text-secondary);
-            font-size: 18px;
-            transition: color 0.3s;
+            position: absolute; left: 15px; top: 50%; transform: translateY(-50%);
+            color: var(--text-secondary); font-size: 18px; transition: color 0.3s;
         }
 
-        .input-group-custom input, 
-        .input-group-custom select {
-            background: rgba(15, 23, 42, 0.6);
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            padding: 14px 15px 14px 50px;
-            color: var(--text-primary);
-            width: 100%;
-            font-size: 15px;
-            transition: all 0.3s;
+        .input-group-custom input, .input-group-custom select {
+            background: rgba(15, 23, 42, 0.6); border: 2px solid var(--border);
+            border-radius: 12px; padding: 14px 15px 14px 50px;
+            color: var(--text-primary); width: 100%; font-size: 15px; transition: all 0.3s;
         }
 
-        .input-group-custom input:focus,
-        .input-group-custom select:focus {
-            outline: none;
-            border-color: var(--accent-primary);
-            background: rgba(15, 23, 42, 0.9);
-            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        .input-group-custom input:focus, .input-group-custom select:focus {
+            outline: none; border-color: var(--accent-primary);
+            background: rgba(15, 23, 42, 0.9); box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
         }
-
-        .input-group-custom input:focus + i,
-        .input-group-custom select:focus + i {
-            color: var(--accent-primary);
-        }
-
-        .input-group-custom input::placeholder {
-            color: #64748b;
-        }
+        .input-group-custom input:focus + i, .input-group-custom select:focus + i { color: var(--accent-primary); }
+        .input-group-custom input::placeholder { color: #64748b; }
 
         .btn-register {
-            width: 100%;
-            padding: 14px;
+            width: 100%; padding: 14px;
             background: linear-gradient(135deg, var(--accent-primary), #8b5cf6);
-            border: none;
-            border-radius: 12px;
-            color: white;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s;
-            margin-top: 10px;
+            border: none; border-radius: 12px; color: white; font-size: 16px;
+            font-weight: 600; cursor: pointer; transition: all 0.3s; margin-top: 10px;
         }
+        .btn-register:hover { transform: translateY(-2px); box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.5); }
+        .btn-register:disabled { opacity: 0.6; cursor: not-allowed; transform: none; }
 
-        .btn-register:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.5);
+        .login-link { text-align: center; margin-top: 20px; color: var(--text-secondary); font-size: 14px; }
+        .login-link a { color: var(--accent-primary); text-decoration: none; font-weight: 600; }
+        .login-link a:hover { text-decoration: underline; }
+
+        /* --- NOTIFICACIONES FLOTANTES (TOASTS) --- */
+        .toast-container {
+            position: fixed; top: 20px; right: 20px; z-index: 9999;
+            display: flex; flex-direction: column; gap: 10px;
         }
-
-        .login-link {
-            text-align: center;
-            margin-top: 20px;
-            color: var(--text-secondary);
-            font-size: 14px;
+        .toast-notification {
+            padding: 15px 20px; border-radius: 12px; color: white;
+            font-weight: 500; font-size: 14px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+            display: flex; align-items: center; gap: 12px;
+            min-width: 320px; max-width: 400px;
+            animation: slideInRight 0.4s ease-out, fadeOut 0.5s ease-in 4.5s forwards;
+            backdrop-filter: blur(10px);
         }
-
-        .login-link a {
-            color: var(--accent-primary);
-            text-decoration: none;
-            font-weight: 600;
+        .toast-notification.success {
+            background: rgba(16, 185, 129, 0.9); border: 1px solid #10b981;
         }
-
-        .alert-custom {
-            padding: 12px 15px;
-            border-radius: 10px;
-            font-size: 14px;
-            margin-bottom: 20px;
-            display: none;
+        .toast-notification.error {
+            background: rgba(239, 68, 68, 0.9); border: 1px solid #ef4444;
         }
+        .toast-notification i { font-size: 20px; }
 
-        .alert-custom.show { display: block; animation: shake 0.5s; }
-        .alert-custom.error { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: #fca5a5; }
-        .alert-custom.success { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #6ee7b7; }
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes fadeOut { to { opacity: 0; transform: translateX(100%); } }
 
         /* Responsive */
         @media (max-width: 768px) {
@@ -212,20 +135,20 @@
             .school-logo { width: 80px; height: 80px; }
             .form-side { padding: 30px 15px; }
             .register-card { padding: 25px; }
+            .toast-container { top: 10px; right: 10px; left: 10px; }
+            .toast-notification { min-width: auto; width: 100%; }
         }
-
-        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
-        @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
-        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
     </style>
 </head>
 <body>
+    <!-- Contenedor para las notificaciones flotantes -->
+    <div id="toastContainer" class="toast-container"></div>
+
     <div class="split-container">
         <!-- Lado Izquierdo: Información -->
         <div class="info-side">
             <div class="info-content">
                 <div class="school-logo">
-                    <!-- Reemplaza src con tu logo real: src="img/logo.png" -->
                     <i class="bi bi-mortarboard-fill" style="font-size: 50px; color: white;"></i>
                 </div>
                 <h1>Complejo Educativo<br>Thomas Jefferson</h1>
@@ -241,8 +164,6 @@
             <div class="register-card">
                 <h2 class="form-title">Crear Cuenta Docente</h2>
                 <p class="form-subtitle">Completa tus datos para acceder al sistema</p>
-
-                <div id="alerta" class="alert-custom"></div>
 
                 <form id="formRegistro">
                     <div class="row">
@@ -317,15 +238,12 @@
     </div>
 
     <script type="module">
+        // 1. IMPORTAR FUNCIONES DE FIREBASE
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
         import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        const app = initializeApp(firebaseConfig);
-        const auth = getAuth(app);
-        const db = getFirestore(app);
-
- // TU NUEVA CONFIGURACIÓN DE FIREBASE
+        // 2. TU NUEVA CONFIGURACIÓN DE FIREBASE (¡DECLARADA ANTES DE USARLA!)
         const firebaseConfig = {
             apiKey: "AIzaSyC1VnkczVVRwNDj6G1kPPdHNZXWNPy_JXA",
             authDomain: "sistema-escolar-8fcee.firebaseapp.com",
@@ -335,12 +253,38 @@
             appId: "1:1017912885647:web:ba6746d5605d281b1dcbfa"
         };
 
-        function mostrarAlerta(mensaje, tipo) {
-            alerta.textContent = mensaje;
-            alerta.className = `alert-custom ${tipo} show`;
-            setTimeout(() => alerta.classList.remove('show'), 5000);
+        // 3. INICIALIZAR FIREBASE
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        // 4. VARIABLES GLOBALES Y ELEMENTOS DEL DOM
+        const CODIGO_SEGURIDAD = 'CLASES26$COED';
+        const form = document.getElementById('formRegistro');
+        const btnSubmit = document.getElementById('btnSubmit');
+        const btnText = document.getElementById('btnText');
+        const btnLoading = document.getElementById('btnLoading');
+
+        // 5. FUNCIÓN PARA NOTIFICACIONES FLOTANTES (TOASTS)
+        function mostrarToast(mensaje, tipo) {
+            const container = document.getElementById('toastContainer');
+            const toast = document.createElement('div');
+            toast.className = `toast-notification ${tipo}`;
+            
+            const icono = tipo === 'success' 
+                ? '<i class="bi bi-check-circle-fill"></i>' 
+                : '<i class="bi bi-x-circle-fill"></i>';
+            
+            toast.innerHTML = `${icono} <span>${mensaje}</span>`;
+            container.appendChild(toast);
+
+            // Eliminar el toast después de 5 segundos
+            setTimeout(() => {
+                toast.remove();
+            }, 5000);
         }
 
+        // 6. LÓGICA DEL FORMULARIO
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
             
@@ -355,30 +299,33 @@
 
             // Validaciones
             if (codigo !== CODIGO_SEGURIDAD) {
-                mostrarAlerta(' Código de seguridad incorrecto.', 'error');
+                mostrarToast('El código de seguridad es incorrecto.', 'error');
                 return;
             }
             if (!correo.endsWith('@clases.edu.sv')) {
-                mostrarAlerta('❌ El correo debe terminar en @clases.edu.sv', 'error');
+                mostrarToast('El correo debe terminar obligatoriamente en @clases.edu.sv', 'error');
                 return;
             }
             if (contrasena !== confirmarContrasena) {
-                mostrarAlerta('❌ Las contraseñas no coinciden.', 'error');
+                mostrarToast('Las contraseñas no coinciden.', 'error');
                 return;
             }
             if (contrasena.length < 6) {
-                mostrarAlerta('❌ La contraseña debe tener al menos 6 caracteres.', 'error');
+                mostrarToast('La contraseña debe tener al menos 6 caracteres.', 'error');
                 return;
             }
 
+            // Estado de carga
             btnSubmit.disabled = true;
             btnText.style.display = 'none';
-            btnLoading.style.display = 'inline';
+            btnLoading.style.display = 'inline-flex';
 
             try {
+                // 1. Crear usuario en Authentication
                 const userCredential = await createUserWithEmailAndPassword(auth, correo, contrasena);
                 const user = userCredential.user;
 
+                // 2. Guardar datos adicionales en Firestore
                 await setDoc(doc(db, 'usuarios', user.uid), {
                     uid: user.uid,
                     nombres: nombres,
@@ -391,16 +338,25 @@
                     fechaRegistro: new Date().toISOString()
                 });
 
-                mostrarAlerta('✅ Cuenta creada exitosamente. Redirigiendo...', 'success');
-                setTimeout(() => { window.location.href = 'index.html'; }, 2000);
+                // 3. Éxito
+                mostrarToast('¡Cuenta creada exitosamente! Redirigiendo al login...', 'success');
+                
+                setTimeout(() => { 
+                    window.location.href = 'index.html'; 
+                }, 2500);
 
             } catch (error) {
-                let msg = 'Error al crear la cuenta.';
-                if (error.code === 'auth/email-already-in-use') msg = '❌ Ese correo ya está registrado.';
-                else if (error.code === 'auth/weak-password') msg = '❌ Contraseña muy débil.';
-                else if (error.code === 'auth/invalid-email') msg = '❌ Correo no válido.';
-                mostrarAlerta(msg, 'error');
+                console.error("Error de Firebase:", error); // Para depuración en consola
                 
+                let msg = 'Error al crear la cuenta.';
+                if (error.code === 'auth/email-already-in-use') msg = 'Ese correo ya está registrado en el sistema.';
+                else if (error.code === 'auth/weak-password') msg = 'La contraseña es demasiado débil.';
+                else if (error.code === 'auth/invalid-email') msg = 'El formato del correo no es válido.';
+                else if (error.code === 'permission-denied') msg = 'Error de permisos en la base de datos. Verifica las reglas de Firestore.';
+                
+                mostrarToast(msg, 'error');
+                
+                // Restaurar botón
                 btnSubmit.disabled = false;
                 btnText.style.display = 'inline';
                 btnLoading.style.display = 'none';
