@@ -511,20 +511,32 @@
         import { getAuth, signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
         import { getFirestore, collection, query, where, getDocs } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
-        // Configuración de Firebase
+         // TU NUEVA CONFIGURACIÓN DE FIREBASE
         const firebaseConfig = {
-            apiKey: "AIzaSyA9M6Yo72SELSRtntpRmacOY-0WdA7c58s",
-            authDomain: "sistema-escolar-ef4a0.firebaseapp.com",
-            projectId: "sistema-escolar-ef4a0",
-            storageBucket: "sistema-escolar-ef4a0.firebasestorage.app",
-            messagingSenderId: "594493709794",
-            appId: "1:594493709794:web:05a2fb57521fc1b9aeedbb",
-            measurementId: "G-2KEHBX540T"
+            apiKey: "AIzaSyC1VnkczVVRwNDj6G1kPPdHNZXWNPy_JXA",
+            authDomain: "sistema-escolar-8fcee.firebaseapp.com",
+            projectId: "sistema-escolar-8fcee",
+            storageBucket: "sistema-escolar-8fcee.firebasestorage.app",
+            messagingSenderId: "1017912885647",
+            appId: "1:1017912885647:web:ba6746d5605d281b1dcbfa"
         };
 
         const app = initializeApp(firebaseConfig);
         const auth = getAuth(app);
         const db = getFirestore(app);
+        const googleProvider = new GoogleAuthProvider();
+
+        const CODIGO_SEGURIDAD = 'CLASES26$COED';
+        const alerta = document.getElementById('alerta');
+        const btnLogin = document.getElementById('btnLogin');
+        const btnText = document.getElementById('btnText');
+        const btnLoading = document.getElementById('btnLoading');
+
+        function mostrarAlerta(mensaje, tipo) {
+            alerta.textContent = mensaje;
+            alerta.className = `alert-custom ${tipo} show`;
+            setTimeout(() => alerta.classList.remove('show'), 5000);
+        }
 
         // Verificar sesión
         onAuthStateChanged(auth, async (user) => {
