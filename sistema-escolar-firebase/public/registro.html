@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro Docente - Sistema Escolar</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="css/animaciones.css">
+    
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --accent-primary: #6366f1;
+            --accent-hover: #4f46e5;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border: #334155;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .split-container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        /* Lado Izquierdo - Información */
+        .info-side {
+            flex: 1;
+            background: linear-gradient(135deg, rgba(99, 102, 241, 0.1), rgba(15, 23, 42, 0.9)), 
+                        url('img/fondos/fondo-login.jpg') center/cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+            position: relative;
+        }
+
+        .info-content {
+            text-align: center;
+            animation: slideInLeft 0.8s ease-out;
+        }
+
+        .school-logo {
+            width: 120px;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .school-logo img {
+            max-width: 80%;
+            max-height: 80%;
+        }
+
+        .info-side h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: white;
+        }
+
+        .info-side p {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        /* Lado Derecho - Formulario */
+        .form-side {
+            flex: 1;
+            background: var(--bg-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            animation: slideInRight 0.8s ease-out;
+        }
+
+        .register-card {
+            background: rgba(30, 41, 59, 0.8);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 500px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 5px;
+            color: var(--text-primary);
+        }
+
+        .form-subtitle {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 30px;
+        }
+
+        .input-group-custom {
+            position: relative;
+            margin-bottom: 20px;
+        }
+
+        .input-group-custom i {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        .input-group-custom input, 
+        .input-group-custom select {
+            background: rgba(15, 23, 42, 0.6);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 14px 15px 14px 50px;
+            color: var(--text-primary);
+            width: 100%;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+
+        .input-group-custom input:focus,
+        .input-group-custom select:focus {
+            outline: none;
+            border-color: var(--accent-primary);
+            background: rgba(15, 23, 42, 0.9);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        .input-group-custom input:focus + i,
+        .input-group-custom select:focus + i {
+            color: var(--accent-primary);
+        }
+
+        .input-group-custom input::placeholder {
+            color: #64748b;
+        }
+
+        .btn-register {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--accent-primary), #8b5cf6);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        .btn-register:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px -5px rgba(99, 102, 241, 0.5);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 20px;
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .login-link a {
+            color: var(--accent-primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .alert-custom {
+            padding: 12px 15px;
+            border-radius: 10px;
+            font-size: 14px;
+            margin-bottom: 20px;
+            display: none;
+        }
+
+        .alert-custom.show { display: block; animation: shake 0.5s; }
+        .alert-custom.error { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.3); color: #fca5a5; }
+        .alert-custom.success { background: rgba(16, 185, 129, 0.1); border: 1px solid rgba(16, 185, 129, 0.3); color: #6ee7b7; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .split-container { flex-direction: column; }
+            .info-side { padding: 40px 20px; min-height: 250px; }
+            .info-side h1 { font-size: 1.8rem; }
+            .school-logo { width: 80px; height: 80px; }
+            .form-side { padding: 30px 15px; }
+            .register-card { padding: 25px; }
+        }
+
+        @keyframes slideInLeft { from { opacity: 0; transform: translateX(-50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes slideInRight { from { opacity: 0; transform: translateX(50px); } to { opacity: 1; transform: translateX(0); } }
+        @keyframes shake { 0%, 100% { transform: translateX(0); } 25% { transform: translateX(-5px); } 75% { transform: translateX(5px); } }
+    </style>
+</head>
+<body>
+    <div class="split-container">
+        <!-- Lado Izquierdo: Información -->
+        <div class="info-side">
+            <div class="info-content">
+                <div class="school-logo">
+                    <!-- Reemplaza src con tu logo real: src="img/logo.png" -->
+                    <i class="bi bi-mortarboard-fill" style="font-size: 50px; color: white;"></i>
+                </div>
+                <h1>Complejo Educativo<br>Thomas Jefferson</h1>
+                <p>Sistema de Gestión Académica</p>
+                <p class="mt-4" style="font-size: 0.9rem; opacity: 0.7;">
+                    <i class="bi bi-shield-check"></i> Plataforma segura para docentes
+                </p>
+            </div>
+        </div>
+
+        <!-- Lado Derecho: Formulario -->
+        <div class="form-side">
+            <div class="register-card">
+                <h2 class="form-title">Crear Cuenta Docente</h2>
+                <p class="form-subtitle">Completa tus datos para acceder al sistema</p>
+
+                <div id="alerta" class="alert-custom"></div>
+
+                <form id="formRegistro">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group-custom">
+                                <input type="text" id="nombres" placeholder="Nombres" required>
+                                <i class="bi bi-person-fill"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group-custom">
+                                <input type="text" id="apellidos" placeholder="Apellidos" required>
+                                <i class="bi bi-person-fill"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group-custom">
+                        <input type="text" id="usuario" placeholder="Nombre de usuario (ej: cportillo)" required>
+                        <i class="bi bi-at"></i>
+                    </div>
+
+                    <div class="input-group-custom">
+                        <input type="email" id="correo" placeholder="Correo institucional (@clases.edu.sv)" required>
+                        <i class="bi bi-envelope-fill"></i>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="input-group-custom">
+                                <input type="password" id="contrasena" placeholder="Contraseña" required minlength="6">
+                                <i class="bi bi-lock-fill"></i>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="input-group-custom">
+                                <input type="password" id="confirmarContrasena" placeholder="Confirmar" required>
+                                <i class="bi bi-lock-fill"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="input-group-custom">
+                        <select id="grado" required>
+                            <option value="" disabled selected>Selecciona tu grado/sección</option>
+                            <option value="Parvularia">Parvularia</option>
+                            <option value="1° Grado - Sección A (Matutino)">1° Grado - Sección A (Matutino)</option>
+                            <option value="7° Grado - Sección A (Matutino)">7° Grado - Sección A (Matutino)</option>
+                            <option value="1° Año ITSI (Vespertino)">1° Año ITSI (Vespertino)</option>
+                        </select>
+                        <i class="bi bi-book-fill"></i>
+                    </div>
+
+                    <div class="input-group-custom">
+                        <input type="text" id="codigoSeguridad" placeholder="Código de seguridad (CLASES26$COED)" required maxlength="15">
+                        <i class="bi bi-shield-lock-fill"></i>
+                    </div>
+
+                    <button type="submit" class="btn-register" id="btnSubmit">
+                        <span id="btnText">Crear Cuenta</span>
+                        <span id="btnLoading" style="display: none;">
+                            <span class="spinner-border spinner-border-sm me-2"></span>Procesando...
+                        </span>
+                    </button>
+                </form>
+
+                <div class="login-link">
+                    ¿Ya tienes cuenta? <a href="index.html">Inicia sesión aquí</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyA9M6Yo72SELSRtntpRmacOY-0WdA7c58s",
+            authDomain: "sistema-escolar-ef4a0.firebaseapp.com",
+            projectId: "sistema-escolar-ef4a0",
+            storageBucket: "sistema-escolar-ef4a0.firebasestorage.app",
+            messagingSenderId: "594493709794",
+            appId: "1:594493709794:web:05a2fb57521fc1b9aeedbb",
+            measurementId: "G-2KEHBX540T"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
+
+        const CODIGO_SEGURIDAD = 'CLASES26$COED';
+        const form = document.getElementById('formRegistro');
+        const alerta = document.getElementById('alerta');
+        const btnSubmit = document.getElementById('btnSubmit');
+        const btnText = document.getElementById('btnText');
+        const btnLoading = document.getElementById('btnLoading');
+
+        function mostrarAlerta(mensaje, tipo) {
+            alerta.textContent = mensaje;
+            alerta.className = `alert-custom ${tipo} show`;
+            setTimeout(() => alerta.classList.remove('show'), 5000);
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const nombres = document.getElementById('nombres').value.trim();
+            const apellidos = document.getElementById('apellidos').value.trim();
+            const usuario = document.getElementById('usuario').value.trim().toLowerCase();
+            const correo = document.getElementById('correo').value.trim();
+            const contrasena = document.getElementById('contrasena').value;
+            const confirmarContrasena = document.getElementById('confirmarContrasena').value;
+            const grado = document.getElementById('grado').value;
+            const codigo = document.getElementById('codigoSeguridad').value.trim();
+
+            // Validaciones
+            if (codigo !== CODIGO_SEGURIDAD) {
+                mostrarAlerta(' Código de seguridad incorrecto.', 'error');
+                return;
+            }
+            if (!correo.endsWith('@clases.edu.sv')) {
+                mostrarAlerta('❌ El correo debe terminar en @clases.edu.sv', 'error');
+                return;
+            }
+            if (contrasena !== confirmarContrasena) {
+                mostrarAlerta('❌ Las contraseñas no coinciden.', 'error');
+                return;
+            }
+            if (contrasena.length < 6) {
+                mostrarAlerta('❌ La contraseña debe tener al menos 6 caracteres.', 'error');
+                return;
+            }
+
+            btnSubmit.disabled = true;
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline';
+
+            try {
+                const userCredential = await createUserWithEmailAndPassword(auth, correo, contrasena);
+                const user = userCredential.user;
+
+                await setDoc(doc(db, 'usuarios', user.uid), {
+                    uid: user.uid,
+                    nombres: nombres,
+                    apellidos: apellidos,
+                    nombreCompleto: `${nombres} ${apellidos}`,
+                    usuario: usuario,
+                    correo: correo,
+                    rol: 'docente',
+                    grado: grado,
+                    fechaRegistro: new Date().toISOString()
+                });
+
+                mostrarAlerta('✅ Cuenta creada exitosamente. Redirigiendo...', 'success');
+                setTimeout(() => { window.location.href = 'index.html'; }, 2000);
+
+            } catch (error) {
+                let msg = 'Error al crear la cuenta.';
+                if (error.code === 'auth/email-already-in-use') msg = '❌ Ese correo ya está registrado.';
+                else if (error.code === 'auth/weak-password') msg = '❌ Contraseña muy débil.';
+                else if (error.code === 'auth/invalid-email') msg = '❌ Correo no válido.';
+                mostrarAlerta(msg, 'error');
+                
+                btnSubmit.disabled = false;
+                btnText.style.display = 'inline';
+                btnLoading.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+</html>
