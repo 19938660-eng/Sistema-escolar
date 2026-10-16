@@ -88,38 +88,36 @@
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
-<script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7/firebase-app.js;
-    import { getAuth  singOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-    import { getFirestore, collection, query, where, getDocs, writeBatch, doc, deleteDoc, addDoc } from "https://www.gstatic.com/firebasejs/1
-    const firebaseConfig = { 
-        apiKey: "AlzaSyC1VnkczVVRwNDj6G1kPPdHNZXWNPy_JXA",
-        authDomain: "sistema-escolar-8fcee.firebaseapp.com",
-        projectId: "sistema-escolar-8fcee",
-        storageBucket: "sistema-escolar-8fcee.firebasestorage.app",
-        messagingSenderId: "10179128
+<div class="controls-card">
+    <div class=controls-row">
+        <div class=control-group">
+            <label><i class="bi bi-book-fill"></i> Materia</label>
+            <select id="selectMateria">
+                <option value="">Selecciona una materia</option>
+                <option value="Matemáticas">Matemáticas</option>
+                <option value="Ciencias">Ciencias</option>
+                <option value="Lenguaje">Lenguaje">Lenguaje</option>
+                <option value="Sociales">Sociales</option>
+                <option value="Inglés">Inglés</option>
+                <option value="Sistema Modular">Sistema Modular</option>
+                <option value="MUCI">MUCI</option>
+                <option value="OPV">OPV</option>
+                <option value="Servicio Social">Servicio Social</option>
+            </select>
+        </div>
+        <div class="control-group" style="flex: O O auto;">
+            <label>&nbsp;</label>
+            <button class="btn-action btn-primary-custom" id="btnNuevaActividad" disabled>
+                <i class="bi bi-plus-circle-fill"></i> Nueva Actividad
+            </button>
+        </div>
+        <div class="control-group" style="flex: O O auto;">
+            <label>&nbsp;</label>
+            <button class="btn-action btn-success-custom" id="btnGuardarTodo" disabled> 
+                <i class="bi bi-cloud-arrow-up-fill"></i> Guardar Todo
+            </button>
+        </div>
+    </div>
+    <div class="periods-tabs" id="periodsTabs">
+        <div class="period-tab active" data-periodo="1">
+            
